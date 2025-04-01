@@ -1,0 +1,89 @@
+# Motor Control Dashboard
+
+## Cấu trúc file
+```
+project/
+├── index.html       # File HTML chính
+├── styles.css       # Toàn bộ CSS
+├── app.js           # Logic JavaScript
+└── README.md        # Tài liệu
+```
+
+## Giải thích comment trong code
+
+### HTML (index.html)
+- **Khối meta**: Khai báo thông tin cơ bản về trang web
+- **Thẻ link**: Kết nối với file CSS và thư viện Bootstrap
+- **Thẻ script**: Kết nối với file JS và các thư viện
+
+### CSS (styles.css)
+- **:root**: Định nghĩa biến CSS toàn cục
+- **body**: Thiết lập font và background
+- **.navbar**: Style cho thanh điều hướng
+- **.card**: Style cho các khối card
+
+### JavaScript (app.js)
+
+#### 1. Biến toàn cục
+```js
+// stepCount: Số lượng step mặc định
+// timeCount: Số lượng time point mặc định
+// initialData: Dữ liệu mẫu cho biểu đồ
+```
+
+#### 2. Khởi tạo WebSocket
+```js
+// socket: Kết nối WebSocket tới server
+// updateConnectionStatus(): Xử lý các trạng thái kết nối
+```
+
+#### 3. Hàm chính
+```js
+// initializeServoChart(): Tạo biểu đồ CanvasJS ban đầu
+// updateChart(): Cập nhật dữ liệu biểu đồ
+```
+
+#### 4. Xử lý sự kiện
+```js
+// setupEventListeners(): Gắn tất cả event listeners
+// - Slider: Cập nhật vị trí servo
+// - Buttons: Thêm step/time, export data
+```
+
+#### 5. Điều khiển motor
+```js
+// LoadData(): Gửi lệnh điều khiển stepper motor
+// HOME(): Đưa motor về vị trí home
+```
+
+## Cách hoạt động
+1. Trang load -> Khởi tạo WebSocket và biểu đồ
+2. Người dùng tương tác -> Cập nhật dữ liệu
+3. WebSocket nhận dữ liệu -> Cập nhật UI
+4. Các lệnh điều khiển -> Gửi qua WebSocket
+
+
+## Ký hiệu theo Flowchart
+A: Các phần khởi tạo ban đầu (load thư viện, khai báo biến, giao diện)
+
+B: Xử lý WebSocket (kết nối, trạng thái)
+
+C: Logic xử lý kết nối WebSocket thành công/thất bại
+
+D-E: Hiển thị trạng thái kết nối
+
+F: Khởi tạo và cập nhật biểu đồ servo
+
+G: Thiết lập các sự kiện UI
+
+H: Vòng lặp chờ tương tác người dùng (implicit trong event listeners)
+
+I-J: Xử lý thay đổi slider và cập nhật biểu đồ
+
+K-L: Thêm step/time mới và cập nhật dữ liệu
+
+M: Export dữ liệu
+
+N: Điều khiển stepper motor (gửi lệnh)
+
+O: Nhận và xử lý dữ liệu từ WebSocket
